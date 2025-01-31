@@ -22,7 +22,14 @@ app.use(passport.session());
 app.use("/", authRouter);
 app.use("/", dashboardRouter);
 app.get("/", (req, res) => {
-  res.send("Hello");
+  if (req.user) {
+    return res.redirect("/dashboard");
+  }
+  res.render("landing");
+});
+
+app.use((req, res) => {
+  res.send("404 Page not found");
 });
 
 const PORT = 3030;

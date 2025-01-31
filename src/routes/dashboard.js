@@ -5,7 +5,7 @@ router.get("/dashboard", (req, res) => {
   if (!req.user) {
     return res.redirect("/log-in");
   }
-  res.json(req.user);
+  res.render("dashboard", { local: req.user });
 });
 
 module.exports = router;

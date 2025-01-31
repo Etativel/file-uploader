@@ -12,7 +12,7 @@ async function registerUser(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await userService.createUser(username, email, hashedPassword);
-    res.status(201).json({ message: "User registered successfully", user });
+    res.redirect("/log-in");
   } catch (error) {
     res.status(500).json({ error: "Error registering user" });
   }
