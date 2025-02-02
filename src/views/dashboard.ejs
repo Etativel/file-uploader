@@ -11,8 +11,49 @@
       <div class="sidebar">
         <h1>Welcome back <%= local.username %></h1>
         <button><a href="/log-out">Log Out</a></button>
+
+        <!-- File Upload Form -->
+        <form action="/dashboard" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" multiple required />
+          <input type="hidden" name="userId" value="<%= local.id %>" />
+          <button type="submit">Upload</button>
+        </form>
+
+        <!-- Folder Creation Form -->
+        <form method="post" action="/dashboard">
+          <input type="hidden" name="userId" value="<%= local.id %>" />
+          <input
+            type="hidden"
+            name="parentPath"
+            value="<%= folder ? folder.path : '' %>"
+          />
+          <input
+            type="text"
+            name="folderName"
+            placeholder="Folder Name"
+            required
+          />
+          <button type="submit">Create Folder</button>
+        </form>
       </div>
-      <div class="main"></div>
+
+      <div class="main">
+        <h2>Current Folder: <%= folder.path %></h2>
+
+        <h3>Folders:</h3>
+        <ul>
+          <% folder.subfolders.forEach(sub => { %>
+          <li><a href="/dashboard/<%= sub.path %>"><%= sub.name %></a></li>
+          <% }); %>
+        </ul>
+
+        <h3>Files:</h3>
+        <ul>
+          <% folder.files.forEach(file => { %>
+          <li><%= file.filename %></li>
+          <% }); %>
+        </ul>
+      </div>
     </div>
   </body>
 </html>

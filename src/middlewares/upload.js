@@ -3,12 +3,12 @@ const path = require("path");
 const fs = require("fs-extra");
 
 const storage = multer.diskStorage({
-  destination: async function (req, res, cb) {
-    const folderPath = req.folderPath || "uploads";
+  destination: async function (req, file, cb) {
+    const folderPath = req.folderPath || "uploads/dashboard";
     await fs.ensureDir(folderPath);
     cb(null, folderPath);
   },
-  filename: function (req, res, cb) {
+  filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });

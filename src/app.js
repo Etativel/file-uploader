@@ -8,6 +8,8 @@ const session = require("./config/sessionConfig");
 // Routes
 const authRouter = require("./routes/auth");
 const dashboardRouter = require("./routes/dashboard");
+const uploadRouter = require("./routes/upload");
+const fileRouter = require("./routes/folder");
 // Initialization
 session(app);
 app.use(express.static(assetPath));
@@ -21,6 +23,9 @@ app.use(passport.session());
 
 app.use("/", authRouter);
 app.use("/", dashboardRouter);
+app.use("/", fileRouter);
+app.use("/", uploadRouter);
+
 app.get("/", (req, res) => {
   if (req.user) {
     return res.redirect("/dashboard");
