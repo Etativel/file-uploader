@@ -55,10 +55,30 @@
         <h3>Files:</h3>
         <ul>
           <% folder.files.forEach(file => { %>
-          <li><%= file.filename %></li>
+          <li>
+            <%= file.filename %>
+
+            <button onclick="deleteFile(<%= file.id %>)">🗑 Delete</button>
+          </li>
           <% }); %>
         </ul>
       </div>
     </div>
+    <script>
+      function deleteFile(fileId) {
+        if (!confirm("Are you sure you want to delete this file?")) return;
+
+        fetch(`/dashboard/delete/${fileId}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            // Refresh the page to update the file list
+            location.reload();
+          })
+          .catch((error) => console.error("Error deleting file:", error));
+      }
+    </script>
   </body>
 </html>
