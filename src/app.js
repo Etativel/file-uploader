@@ -10,7 +10,8 @@ const authRouter = require("./routes/auth");
 const dashboardRouter = require("./routes/dashboard");
 const uploadRouter = require("./routes/upload");
 const fileRouter = require("./routes/folder");
-const fileManagement = require("./routes/fileManagement");
+const fileManagementRouter = require("./routes/fileManagementRouter");
+const folderManagementRouter = require("./routes/folderManagementRouter");
 // Initialization
 session(app);
 app.use(express.static(assetPath));
@@ -26,7 +27,8 @@ app.use("/", authRouter);
 app.use("/", dashboardRouter);
 app.use("/", fileRouter);
 app.use("/", uploadRouter);
-app.use("/", fileManagement);
+app.use("/", fileManagementRouter);
+app.use("/", folderManagementRouter);
 app.get("/", (req, res) => {
   if (req.user) {
     return res.redirect("/dashboard");

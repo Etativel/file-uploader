@@ -48,7 +48,11 @@
         <ul>
           <% folder.subfolders.forEach(sub => { %> <% let folderPath =
           sub.path.replace("uploads/dashboard/", ""); %>
-          <li><a href="/dashboard/<%= folderPath %>"><%= sub.name %></a></li>
+          <li>
+            <a href="/dashboard/<%= folderPath %>"><%= sub.name %></a>
+
+            <button onclick="deleteFolder(<%=sub.id%>)"><%=sub.id %></button>
+          </li>
           <% }); %>
         </ul>
 
@@ -78,6 +82,20 @@
             location.reload();
           })
           .catch((error) => console.error("Error deleting file:", error));
+      }
+      function deleteFolder(folderId) {
+        if (!confirm("Are you sure to delete the folder and its content?"))
+          return;
+
+        fetch(`/dashboard/delete-folder/${folderId}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            location.reload();
+          })
+          .catch((error) => console.error("Error deleting folder:", error));
       }
     </script>
   </body>
