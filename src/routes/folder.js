@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const path = require("path");
 const fs = require("fs-extra");
 
-router.post("/dashboard", async (req, res) => {
+router.post("/dashboard/create", async (req, res) => {
   const { parentPath, folderName, userId } = req.body;
 
   if (!folderName || !userId) {
@@ -13,12 +13,11 @@ router.post("/dashboard", async (req, res) => {
   }
 
   try {
-    let folderPath = folderName; // Default to folder name
-
+    let folderPath = folderName;
     if (parentPath && parentPath !== "dashboard") {
-      folderPath = `${parentPath}/${folderName}`; // Append to parent path correctly
+      folderPath = `${parentPath}/${folderName}`;
     } else {
-      folderPath = `dashboard/${folderName}`; // Default to dashboard folder
+      folderPath = `dashboard/${folderName}`;
     }
 
     // Check if the folder already exists
@@ -41,7 +40,7 @@ router.post("/dashboard", async (req, res) => {
         name: folderName,
         path: folderPath,
         userId: parseInt(userId),
-        parentId: parentFolder ? parentFolder.id : null, // Assign parentId correctly
+        parentId: parentFolder ? parentFolder.id : null,
       },
     });
 
@@ -49,8 +48,12 @@ router.post("/dashboard", async (req, res) => {
     const physicalFolderPath = path.join(__dirname, "../uploads", folderPath);
     await fs.ensureDir(physicalFolderPath);
 
+    let redirectPath = folderPath.replace("uploads", "");
+    redirectPath = redirectPath.replace(`/${folderName}`, "");
+
     // Redirect to the newly created folder
-    res.redirect(`/${folderPath}`);
+    console.log("this null", redirectPath);
+    res.redirect(`${redirectPath}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error creating folder");

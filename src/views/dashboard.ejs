@@ -13,14 +13,18 @@
         <button><a href="/log-out">Log Out</a></button>
 
         <!-- File Upload Form -->
-        <form action="/dashboard" method="post" enctype="multipart/form-data">
+        <form
+          action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
+          method="post"
+          enctype="multipart/form-data"
+        >
           <input type="file" name="file" multiple required />
           <input type="hidden" name="userId" value="<%= local.id %>" />
           <button type="submit">Upload</button>
         </form>
 
         <!-- Folder Creation Form -->
-        <form method="post" action="/dashboard">
+        <form method="post" action="/dashboard/create">
           <input type="hidden" name="userId" value="<%= local.id %>" />
           <input
             type="hidden"
@@ -42,8 +46,9 @@
 
         <h3>Folders:</h3>
         <ul>
-          <% folder.subfolders.forEach(sub => { %>
-          <li><a href="/dashboard/<%= sub.path %>"><%= sub.name %></a></li>
+          <% folder.subfolders.forEach(sub => { %> <% let folderPath =
+          sub.path.replace("uploads/dashboard/", ""); %>
+          <li><a href="/dashboard/<%= folderPath %>"><%= sub.name %></a></li>
           <% }); %>
         </ul>
 

@@ -4,11 +4,12 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get("/:folderPath(*)", async (req, res) => {
+  // console.log("Param");
   // console.log(req.params);
   const folderPath = req.params.folderPath
     ? `uploads/${req.params.folderPath}`
-    : "dashboard"; // Default to "dashboard" if no folderPath is provided
-  // console.log(folderPath);
+    : "dashboard";
+
   const folder = await prisma.folder.findUnique({
     where: { path: folderPath },
     include: { subfolders: true, files: true },
