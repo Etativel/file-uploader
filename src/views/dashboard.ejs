@@ -47,7 +47,7 @@
         <h3>Folders:</h3>
         <ul>
           <% folder.subfolders.forEach(sub => { %> <% let folderPath =
-          sub.path.replace("uploads/dashboard/", ""); %>
+          sub.path.replace(`uploads/dashboard-${local.id}/`, ""); %>
           <li>
             <a href="/dashboard/<%= folderPath %>"><%= sub.name %></a>
 

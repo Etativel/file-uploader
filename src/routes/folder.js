@@ -17,7 +17,7 @@ router.post("/dashboard/create", async (req, res) => {
     if (parentPath && parentPath !== "dashboard") {
       folderPath = `${parentPath}/${folderName}`;
     } else {
-      folderPath = `dashboard/${folderName}`;
+      folderPath = `dashboard-${req.user.id}/${folderName}`;
     }
 
     // Check if the folder already exists
@@ -50,10 +50,12 @@ router.post("/dashboard/create", async (req, res) => {
 
     let redirectPath = folderPath.replace("uploads", "");
     redirectPath = redirectPath.substring(0, redirectPath.lastIndexOf("/"));
+
+    let updatedUrl = redirectPath.replace(/(dashboard)-\d+/, "$1");
     // console.log(redirectPath);
     // Redirect to the newly created folder
     // console.log("this null", redirectPath);
-    res.redirect(`${redirectPath}`);
+    res.redirect(`${updatedUrl}`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error creating folder");

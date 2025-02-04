@@ -24,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", authRouter);
-app.use("/", dashboardRouter);
+app.use("/dashboard", dashboardRouter);
 app.use("/", fileRouter);
 app.use("/", uploadRouter);
 app.use("/", fileManagementRouter);
@@ -35,7 +35,6 @@ app.get("/", (req, res) => {
   }
   res.render("landing");
 });
-
 app.use((req, res) => {
   res.send("404 Page not found");
 });

@@ -14,7 +14,7 @@ router.post(
     //Use '0' instead of folderPath
     const folderPath = req.params["0"] ? `${req.params["0"]}` : "dashboard";
     // Default to "dashboard" if no folderPath is provided
-
+    console.log(req.params);
     req.folderPath = path.join(__dirname, "../uploads", folderPath);
     // This will create folder that didn't exist when user trying to upload to it, instead of creating it via folder.
     // The folder routes will only create the folder in the database
@@ -31,12 +31,14 @@ router.post(
       ""
     );
     const pagePath = `${req.params["0"] || ""}`.replace(/\/$/, "");
+    let updatedPagePath = pagePath.replace(/(dashboard)-\d+/, "$1");
+    // console.log(pagePath);
 
     let folder = await prisma.folder.findUnique({
       where: { path: fileFolderPath },
     });
 
-    if (!folder && fileFolderPath !== "uploads/dashboard") {
+    if (!folder && fileFolderPath !== `uploads/dashboard-${req.user.id}`) {
       folder = await prisma.folder.create({
         data: {
           name: path.basename(fileFolderPath),
@@ -58,7 +60,7 @@ router.post(
 
     await prisma.file.createMany({ data: files });
 
-    res.redirect(`/${pagePath}`);
+    res.redirect(`/${updatedPagePath}`);
   }
 );
 
