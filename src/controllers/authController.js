@@ -3,6 +3,9 @@ const userService = require("../services/userServices");
 
 // Sign up
 async function getSignUpForm(req, res) {
+  if (req.user) {
+    return res.redirect("/dashboard");
+  }
   res.render("signUpForm");
 }
 
@@ -20,6 +23,9 @@ async function registerUser(req, res) {
 
 // Log in
 async function getLoginForm(req, res) {
+  if (req.user) {
+    return res.redirect("/dashboard");
+  }
   res.render("loginForm");
 }
 

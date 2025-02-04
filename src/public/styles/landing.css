@@ -1,0 +1,70 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --primary-blue: #1a73e8;
+  --dark-blue: #174ea6;
+}
+
+.text-align {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  /* background-color: blue;     */
+}
+
+.nav-container {
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+  padding: 10px 9px 10px 24px;
+  font-size: 1rem;
+  height: fit-content;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* background-color: red; */
+  z-index: 2;
+}
+
+.btn-primary-ctr {
+  display: inline-flex; /* Makes it behave like a button */
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 3px;
+  border: 0px solid var(--primary-blue);
+  background-color: var(--primary-blue);
+  text-decoration: none;
+  color: white;
+  font-size: large;
+  /* width: 100%; */
+  cursor: pointer;
+  transition: background-color 0.2s ease, border 0.2s ease;
+}
+
+.btn-primary-ctr:hover {
+  border: 0px solid var(--dark-blue);
+  background-color: var(--dark-blue);
+}
+
+/* HEADER */
+.header-container {
+  height: 100vh;
+  /* background-color: red; */
+}
