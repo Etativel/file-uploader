@@ -10,11 +10,27 @@ router.get("/:folderPath(*)", async (req, res) => {
     ? `uploads/${req.params.folderPath}`
     : "dashboard";
 
+  let dashboardFolder = await prisma.folder.findUnique({
+    where: {
+      path: "uploads/dashboard",
+    },
+  });
+
+  if (!dashboardFolder) {
+    await prisma.folder.create({
+      data: {
+        name: "dasboard",
+        path: "uploads/dashboard",
+        parentId: null,
+        userId: req.user.id,
+      },
+    });
+  }
   const folder = await prisma.folder.findUnique({
     where: { path: folderPath },
     include: { subfolders: true, files: true },
   });
-  console.log(folder);
+  // console.log(folder);
   if (!folder) {
     return res.status(404).send("Folder not found");
   }

@@ -25,10 +25,8 @@ async function getLoginForm(req, res) {
 
 async function loginUser(req, res) {
   try {
-    console.log("in login");
     const { username, password } = req.body;
     const user = await userService.getUser(username);
-    console.log(user);
   } catch (error) {
     res.status(500).json({ error: "No user found" });
   }

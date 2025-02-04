@@ -39,6 +39,7 @@ async function deleteFolder(req, res) {
 
     // Delete files from the filesystem
     for (const file of allFiles) {
+      console.log(file);
       await fs
         .unlink(file.path)
         .catch((err) => console.error("File deletion error:", err));
@@ -60,10 +61,10 @@ async function deleteFolder(req, res) {
     // Remove the actual directories
     for (const f of subfolders.reverse()) {
       await fs
-        .rmdir(f.path, { recursive: true })
+        .rm(f.path, { recursive: true })
         .catch((err) => console.error("Folder deletion error:", err));
     }
-    await fs.rmdir(folder.path, { recursive: true });
+    await fs.rm(folder.path, { recursive: true });
 
     res.json({ message: "Folder and all subfolders deleted successfully" });
   } catch (error) {

@@ -45,14 +45,14 @@ router.post("/dashboard/create", async (req, res) => {
     });
 
     // Create the actual folder in the filesystem
-    const physicalFolderPath = path.join(__dirname, "../uploads", folderPath);
-    await fs.ensureDir(physicalFolderPath);
+    // const physicalFolderPath = path.join(__dirname, "../uploads", folderPath);
+    // await fs.ensureDir(physicalFolderPath);
 
     let redirectPath = folderPath.replace("uploads", "");
-    redirectPath = redirectPath.replace(`/${folderName}`, "");
-
+    redirectPath = redirectPath.substring(0, redirectPath.lastIndexOf("/"));
+    // console.log(redirectPath);
     // Redirect to the newly created folder
-    console.log("this null", redirectPath);
+    // console.log("this null", redirectPath);
     res.redirect(`${redirectPath}`);
   } catch (error) {
     console.error(error);

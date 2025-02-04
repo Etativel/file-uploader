@@ -12,12 +12,12 @@ router.post(
   // Capture any subfolder inside dashboard
   async (req, res, next) => {
     //Use '0' instead of folderPath
-    const folderPath = req.params["0"]
-      ? `dashboard/${req.params["0"]}`
-      : "dashboard";
+    const folderPath = req.params["0"] ? `${req.params["0"]}` : "dashboard";
     // Default to "dashboard" if no folderPath is provided
 
     req.folderPath = path.join(__dirname, "../uploads", folderPath);
+    // This will create folder that didn't exist when user trying to upload to it, instead of creating it via folder.
+    // The folder routes will only create the folder in the database
     await fs.ensureDir(req.folderPath);
     next();
   },
