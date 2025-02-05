@@ -15,7 +15,7 @@ async function registerUser(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await userService.createUser(username, email, hashedPassword);
-    res.redirect("/log-in");
+    res.redirect("/sign-in");
   } catch (error) {
     res.status(500).json({ error: "Error registering user" });
   }
@@ -36,7 +36,7 @@ async function loginUser(req, res) {
   } catch (error) {
     res.status(500).json({ error: "No user found" });
   }
-  res.redirect("/log-in");
+  res.redirect("/sign-in");
 }
 
 module.exports = {

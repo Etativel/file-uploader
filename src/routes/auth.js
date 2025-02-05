@@ -43,12 +43,12 @@ passport.deserializeUser(async (id, done) => {
 router.get("/sign-up", authController.getSignUpForm);
 router.post("/sign-up", authController.registerUser);
 
-router.get("/log-in", authController.getLoginForm);
+router.get("/sign-in", authController.getLoginForm);
 router.post(
-  "/log-in",
+  "/sign-in",
   passport.authenticate("local", {
     successRedirect: "/dashboard",
-    failureRedirect: "/log-in",
+    failureRedirect: "/sign-in",
     // failureFlash: true,
   })
 );
