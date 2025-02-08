@@ -133,7 +133,7 @@
   margin: 12px 0px;
   border-radius: 6px;
   border: none;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08), 0px 3px 5px rgba(0, 0, 0, 0.15); /* Softer and fainter */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08), 0px 3px 5px rgba(0, 0, 0, 0.15);
   width: 100%;
   font-size: medium;
 }
@@ -164,7 +164,7 @@
   color: white;
   padding: 18px;
   margin: 12px 0px;
-  border-radius: 18px;
+  border-radius: 24px;
   border: 0px;
   border: 0px solid var(--primary-blue);
   background-color: var(--primary-blue);

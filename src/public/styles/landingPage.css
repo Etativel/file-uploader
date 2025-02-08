@@ -47,7 +47,7 @@ a {
 }
 
 .btn-primary-ctr {
-  display: inline-flex; /* Makes it behave like a button */
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   height: 46px;
@@ -158,16 +158,62 @@ a {
 .file-icon {
   transition: transform 0.5s ease-in-out;
   transform: rotate(0deg) translate(0, 0);
+  animation: rightUp 2s ease-in-out;
 }
 
 .jpg-icon {
   transform: translate(0, 0);
   transition: transform 0.5s ease-in-out;
+  animation: bottomUp 2s ease-in-out;
 }
 
 .txt-icon {
   transform: rotate(0deg) translate(0, 0);
+  animation: leftUp 2s ease-in-out;
   transition: transform 0.5s ease-in-out;
+}
+
+@keyframes leftUp {
+  0% {
+    transform: rotate(0deg) translate(0, 0); /* Start */
+  }
+  40% {
+    transform: rotate(-45deg) translate(-50px, -190px); /* Go out */
+  }
+  60% {
+    transform: rotate(-45deg) translate(-50px, -190px); /* Pause (hold position) */
+  }
+  100% {
+    transform: rotate(0deg) translate(0, 0); /* Go in */
+  }
+}
+@keyframes bottomUp {
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  40% {
+    transform: translate(0px, -180px);
+  }
+  60% {
+    transform: translate(0px, -180px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes rightUp {
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  40% {
+    transform: rotate(45deg) translate(50px, -190px);
+  }
+  60% {
+    transform: rotate(45deg) translate(50px, -190px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 .header-img:hover {

@@ -4,41 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/styles/dashboardPage.css" />
+    <link rel="shortcut icon" href="../icons/folder.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/dashboard.css" />
   </head>
   <body>
     <div class="dashboard-container">
       <div class="sidebar">
-        <h1>Welcome back <%= local.username %></h1>
-        <button><a href="/log-out">Log Out</a></button>
+        <div class="sidebar-header">
+          <h2>Drive</h2>
+        </div>
+        <div class="add-btn">
+          <button>+ New</button>
+        </div>
+        <div class="sidebar-component-ctr">
+          <button class="dashboard sidebar-comp"></button>
+          <button class="dashboard sidebar-comp"></button>
+        </div>
+        <div class="form-container">
+          <h1>Welcome back <%= local.username %></h1>
+          <button><a href="/log-out">Log Out</a></button>
 
-        <!-- File Upload Form -->
-        <form
-          action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <input type="file" name="file" multiple required />
-          <input type="hidden" name="userId" value="<%= local.id %>" />
-          <button type="submit">Upload</button>
-        </form>
+          <!-- File Upload Form -->
+          <form
+            action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <input type="file" name="file" multiple required />
+            <input type="hidden" name="userId" value="<%= local.id %>" />
+            <button type="submit">Upload</button>
+          </form>
 
-        <!-- Folder Creation Form -->
-        <form method="post" action="/dashboard/create">
-          <input type="hidden" name="userId" value="<%= local.id %>" />
-          <input
-            type="hidden"
-            name="parentPath"
-            value="<%= folder ? folder.path : '' %>"
-          />
-          <input
-            type="text"
-            name="folderName"
-            placeholder="Folder Name"
-            required
-          />
-          <button type="submit">Create Folder</button>
-        </form>
+          <!-- Folder Creation Form -->
+          <form method="post" action="/dashboard/create">
+            <input type="hidden" name="userId" value="<%= local.id %>" />
+            <input
+              type="hidden"
+              name="parentPath"
+              value="<%= folder ? folder.path : '' %>"
+            />
+            <input
+              type="text"
+              name="folderName"
+              placeholder="Folder Name"
+              required
+            />
+            <button type="submit">Create Folder</button>
+          </form>
+        </div>
       </div>
 
       <div class="main">
