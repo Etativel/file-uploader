@@ -12,7 +12,8 @@
       <div class="left-side">
         <div class="left-item-ctr">
           <div class="web-title-head web-title">
-            <img src="../icons/folder.png" class="header-icon" />Cloud Drive
+            <img src="../icons/folder.png" class="header-icon" />
+            <p class="header-web-title-text">Cloud Drive</p>
           </div>
           <div class="head-b-text">Store and share files online</div>
           <div class="head-s-text">
@@ -28,12 +29,39 @@
         </div>
       </div>
       <div class="right-side">
-        <form action="/sign-in" method="POST">
-          <input name="username" type="text" placeholder="username" />
-          <input name="password" type="text" placeholder="password" />
-          <button type="submit">Log in</button>
-        </form>
+        <div class="login-container">
+          <h2 class="login-title">Sign In</h2>
+          <form action="/sign-in" method="POST" class="login-form">
+            <input
+              name="username"
+              type="text"
+              placeholder="username"
+              class="input-box username-input"
+            />
+            <input
+              name="password"
+              type="text"
+              placeholder="password"
+              class="input-box password-input"
+            />
+            <button type="submit" class="submit-btn">Sign in</button>
+          </form>
+          <div class="sign-up-info">
+            Don't have an account?
+            <a href="/sign-up" class="create-acc">Create Account</a>
+          </div>
+        </div>
       </div>
     </div>
+    <script>
+      const webTitle = document.querySelector(".header-web-title-text");
+      const headerIcon = document.querySelector(".header-icon");
+      webTitle.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+      headerIcon.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    </script>
   </body>
 </html>

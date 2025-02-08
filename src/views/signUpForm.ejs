@@ -3,14 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
+    <title>Cloudnest | Sign in</title>
+    <link rel="stylesheet" href="../styles/signInPage.css" />
+    <link rel="shortcut icon" href="../icons/folder.png" type="image/x-icon" />
   </head>
   <body>
-    <form action="/sign-up" method="POST">
-      <input name="username" type="text" placeholder="username" required />
-      <input name="email" type="email" placeholder="email" required />
-      <input name="password" type="text" placeholder="password" required />
-      <button type="submit">Sign up</button>
-    </form>
+    <div class="container">
+      <div class="left-side">
+        <div class="left-item-ctr">
+          <div class="web-title-head web-title">
+            <img src="../icons/folder.png" class="header-icon" />
+            <p class="header-web-title-text">Cloud Drive</p>
+          </div>
+          <div class="head-b-text">Store and share files online</div>
+          <div class="head-s-text">
+            Effortlessly upload, access, and manage your files from anywhere.
+          </div>
+          <div class="header-img-ctr">
+            <img
+              src="../icons/white-cloud.png"
+              alt=""
+              class="header-img image-front big-card"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="right-side">
+        <div class="login-container">
+          <h2 class="login-title">Sign Up</h2>
+          <form action="/sign-up" method="POST" class="login-form">
+            <input
+              name="username"
+              type="text"
+              placeholder="username"
+              required
+              class="input-box"
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="email"
+              required
+              class="input-box"
+            />
+            <input
+              name="password"
+              type="text"
+              placeholder="password"
+              required
+              class="input-box"
+            />
+
+            <button type="submit" class="submit-btn">Register</button>
+          </form>
+          <div class="sign-up-info">
+            Already have an account?
+            <a href="/sign-in" class="create-acc">Sign in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const webTitle = document.querySelector(".header-web-title-text");
+      const headerIcon = document.querySelector(".header-icon");
+      webTitle.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+      headerIcon.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    </script>
   </body>
 </html>
