@@ -161,7 +161,7 @@ body {
 }
 
 .hide-component {
-  display: none;
+  display: none !important;
 }
 
 .toggle-btn {
@@ -178,6 +178,7 @@ body {
   gap: 12px;
   transform: translateX(-15px);
   cursor: pointer;
+  margin-bottom: 8px;
 }
 
 .toggle-btn:hover {
@@ -195,4 +196,34 @@ body {
 }
 
 .folder-container {
+  display: flex;
+  /* background-color: red; */
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.small-folder-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.folder {
+  display: flex;
+  flex-grow: 1;
+  /* max-width: 200px; */
+  min-width: 200px;
+  background-color: #f0f4f9;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.folder:hover {
+  background-color: #dfe3e7;
+}
+
+.folder-name {
+  width: 100%;
+  padding-left: 12px;
 }

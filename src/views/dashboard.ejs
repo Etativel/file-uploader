@@ -140,15 +140,26 @@
                   />
                 </svg>
 
-                Suggested Folders
+                Suggested folder
               </button>
             </div>
             <div class="folder-container">
-              <div class="folder-1 folder">Folder 1</div>
-              <div class="folder-1 folder">Folder 2</div>
-              <div class="folder-1 folder">Folder 3</div>
-              <div class="folder-1 folder">Folder 4</div>
-              <div class="folder-1 folder">Folder 5</div>
+              <% folder.subfolders.forEach(sub => { %> <% let folderPath =
+              sub.path.replace(`uploads/dashboard-${local.id}/`, ""); %>
+              <div
+                class="folder-1 folder"
+                onclick="redirectPageToFolder('<%=folderPath%>')"
+              >
+                <img
+                  class="small-folder-icon"
+                  src="../icons/small-folder.png"
+                  alt=""
+                />
+                <div class="folder-name"><%=sub.name%></div>
+                <button class="folder-options">:</button>
+              </div>
+
+              <% }); %>
             </div>
           </section>
           <section>
@@ -182,7 +193,7 @@
                     d="m19.5 8.25-7.5 7.5-7.5-7.5"
                   />
                 </svg>
-                Suggested Files
+                Suggested file
               </button>
             </div>
             <div class="file-container">
@@ -255,6 +266,14 @@
         } else {
           const fileContainer = document.querySelector(".file-container");
           fileContainer.classList.toggle("hide-component");
+        }
+      }
+
+      function redirectPageToFolder(folderPath) {
+        if (folderPath) {
+          window.location.href = `/dashboard/${folderPath}`;
+        } else {
+          console.error("Invalid folder path:", folderPath);
         }
       }
 
