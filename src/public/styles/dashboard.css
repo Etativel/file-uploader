@@ -5,6 +5,11 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 :root {
   --blue-background: #c2e7ff;
   --blue-text: #004a77;
@@ -36,8 +41,8 @@ body {
   align-items: center;
   gap: 12px;
   padding: 8px 0px;
-  padding-top: 12px;
-  padding-left: 18px;
+  padding-top: 18px;
+  padding-left: 28px;
 }
 
 .header-icon {
@@ -193,6 +198,9 @@ body {
 
 .welcome-text {
   font-size: x-large;
+  /* padding-left: 12px; */
+  display: flex;
+  align-items: center;
 }
 
 .folder-container {
@@ -226,4 +234,15 @@ body {
 .folder-name {
   width: 100%;
   padding-left: 12px;
+}
+
+.folder-link {
+  padding: 6px 12px;
+  border-radius: 18px;
+  /* display: flex; */
+  align-items: center;
+}
+
+.folder-link:hover {
+  background-color: var(--gray-background);
 }
