@@ -9,6 +9,8 @@
   --blue-background: #c2e7ff;
   --blue-text: #004a77;
   --gray-background: #e7e8eb;
+  --btn-blue-back: #ecf2fc;
+  --btn-blue-text: #0b57d0;
 }
 
 body {
@@ -135,6 +137,7 @@ body {
   background-color: white;
   padding: 0px 24px 24px;
   overflow-y: auto;
+  scrollbar-width: thin;
   /* position: sticky; */
 }
 
@@ -143,9 +146,10 @@ body {
   top: 51px;
   z-index: 9;
   /* margin-top: 40px; */
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   background-color: white;
   padding-top: 12px;
+  /* border-radius: 0px 0px 24px 24px; */
 }
 
 .main-content-title {
@@ -154,4 +158,41 @@ body {
   padding-top: 24px;
   z-index: 10;
   background-color: white;
+}
+
+.hide-component {
+  display: none;
+}
+
+.toggle-btn {
+  width: 100%;
+  max-width: 220px;
+  font-size: medium;
+  padding: 8px 8px 8px 12px;
+  border-radius: 24px;
+  border: 0px;
+  background-color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateX(-15px);
+  cursor: pointer;
+}
+
+.toggle-btn:hover {
+  background-color: var(--btn-blue-back);
+  color: var(--btn-blue-text);
+}
+
+.arrow-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.welcome-text {
+  font-size: x-large;
+}
+
+.folder-container {
 }
