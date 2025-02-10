@@ -113,6 +113,16 @@ body {
   align-items: center;
 }
 
+.sidebar-comp.active {
+  background-color: var(--blue-background);
+  color: var(--btn-blue-text);
+}
+
+.sidebar-comp.active:hover {
+  background-color: var(--blue-background);
+  color: var(--btn-blue-text);
+}
+
 .comp-text {
   padding-left: 16px;
 }
