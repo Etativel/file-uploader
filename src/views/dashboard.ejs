@@ -114,23 +114,6 @@
             <input type="hidden" name="userId" value="<%= local.id %>" />
             <button type="submit">Upload</button>
           </form>
-
-          <form method="post" action="/dashboard/create">
-            <input type="hidden" name="userId" value="<%= local.id %>" />
-            <input
-              type="hidden"
-              name="parentPath"
-              value="<%= folder ? folder.path : '' %>"
-            />
-            <input
-              type="text"
-              name="folderName"
-              placeholder="Folder Name"
-              required
-              maxlength="20"
-            />
-            <button type="submit">Create Folder</button>
-          </form>
         </div>
       </div>
 
@@ -271,5 +254,31 @@
         </div>
       </div>
     </div>
+
+    <dialog class="create-folder-dialog">
+      <div class="dialog-ctr c-folder">
+        <p class="c-f-title">New folder</p>
+        <form method="post" action="/dashboard/create" class="c-f-form">
+          <input type="hidden" name="userId" value="<%= local.id %>" />
+          <input
+            type="hidden"
+            name="parentPath"
+            value="<%= folder ? folder.path : '' %>"
+          />
+          <input
+            type="text"
+            name="folderName"
+            placeholder="Folder Name"
+            required
+            maxlength="20"
+            class="folder-name-input"
+          />
+          <div class="c-f-btn">
+            <button class="c-f-cancel" type="button">Cancel</button>
+            <button type="submit" class="c-f-submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
   </body>
 </html>

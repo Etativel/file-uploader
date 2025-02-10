@@ -319,6 +319,77 @@ body {
   background-color: var(--gray-background);
 }
 
+.create-folder-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 0px;
+
+  height: 200px;
+  max-width: 350px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.c-f-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.dialog-ctr {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 24px 24px 6px 24px;
+  height: 100%;
+  justify-content: space-around;
+  z-index: 30;
+}
+
+.c-f-btn {
+  padding-left: 55%;
+  display: flex;
+  gap: 24px;
+}
+
+.folder-name-input {
+  padding: 9px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.folder-name-input:focus {
+  border-color: var(--btn-blue-text);
+  box-shadow: 0 0 2px var(--btn-blue-text);
+}
+
+.c-f-cancel,
+.c-f-submit {
+  color: var(--btn-blue-text);
+  border: 0px;
+  background-color: white;
+  cursor: pointer;
+  /* font-weight: bold; */
+  padding: 8px;
+}
+
+.c-f-cancel:hover,
+.c-f-submit:hover {
+  background-color: #f5f8fd;
+  border-radius: 18px;
+}
+
+.c-f-title {
+  font-size: large;
+}
+
 @media (max-width: 650px) {
   .sidebar {
     display: none;

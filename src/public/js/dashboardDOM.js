@@ -174,3 +174,27 @@ function deleteFolder(folderId) {
     })
     .catch((error) => console.error("Error deleting folder:", error));
 }
+
+// Dialog
+const createFolderDialog = document.querySelector(".create-folder-dialog");
+const showCreateFolderDialog = document.querySelector(".create-folder");
+
+const cancelCF = document.querySelector(".c-f-cancel");
+
+showCreateFolderDialog.addEventListener("click", () => {
+  createFolderDialog.showModal();
+});
+
+cancelCF.addEventListener("click", () => {
+  const inputValue = document.querySelector(".folder-name-input");
+  if (inputValue.value) {
+    inputValue.value = "";
+  }
+  createFolderDialog.close();
+});
+
+createFolderDialog.addEventListener("click", (event) => {
+  if (event.target === createFolderDialog) {
+    createFolderDialog.close();
+  }
+});
