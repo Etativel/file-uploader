@@ -52,6 +52,7 @@ body {
 
 .sidebar {
   background-color: #f8fafd;
+  width: 350px;
 }
 
 .add-btn.folder-options {
@@ -236,6 +237,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
+  max-width: 50%;
 }
 
 .folder:hover {
@@ -319,6 +321,7 @@ body {
   background-color: var(--gray-background);
 }
 
+.upload-dialog,
 .create-folder-dialog {
   position: fixed;
   top: 50%;
@@ -334,6 +337,7 @@ body {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
+.u-form,
 .c-f-form {
   display: flex;
   flex-direction: column;
@@ -351,6 +355,7 @@ body {
   z-index: 30;
 }
 
+.u-btn,
 .c-f-btn {
   padding-left: 55%;
   display: flex;
@@ -370,6 +375,8 @@ body {
   box-shadow: 0 0 2px var(--btn-blue-text);
 }
 
+.u-cancel,
+.u-submit,
 .c-f-cancel,
 .c-f-submit {
   color: var(--btn-blue-text);
@@ -380,6 +387,8 @@ body {
   padding: 8px;
 }
 
+.u-cancel:hover,
+.u-submit:hover,
 .c-f-cancel:hover,
 .c-f-submit:hover {
   background-color: #f5f8fd;
@@ -388,6 +397,20 @@ body {
 
 .c-f-title {
   font-size: large;
+}
+
+.choose-file {
+  padding: 9px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.choose-file:focus {
+  border-color: var(--btn-blue-text);
+  box-shadow: 0 0 2px var(--btn-blue-text);
 }
 
 @media (max-width: 650px) {

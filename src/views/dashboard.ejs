@@ -103,18 +103,7 @@
             <p class="comp-text">Dashboard</p>
           </button>
         </div>
-        <div class="form-container">
-          <button><a href="/log-out">Log Out</a></button>
-          <form
-            action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <input type="file" name="file" multiple required />
-            <input type="hidden" name="userId" value="<%= local.id %>" />
-            <button type="submit">Upload</button>
-          </form>
-        </div>
+        <button><a href="/log-out">Log Out</a></button>
       </div>
 
       <div class="main">
@@ -276,6 +265,31 @@
           <div class="c-f-btn">
             <button class="c-f-cancel" type="button">Cancel</button>
             <button type="submit" class="c-f-submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog class="upload-dialog">
+      <div class="dialog-ctr">
+        <p class="c-f-title">Upload file</p>
+        <form
+          action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
+          method="post"
+          enctype="multipart/form-data"
+          class="u-form"
+        >
+          <input
+            type="file"
+            name="file"
+            multiple
+            required
+            class="choose-file"
+          />
+          <input type="hidden" name="userId" value="<%= local.id %>" />
+          <div class="u-btn">
+            <button class="u-cancel" type="button">Cancel</button>
+            <button type="submit" class="u-submit">Upload</button>
           </div>
         </form>
       </div>

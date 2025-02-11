@@ -179,7 +179,19 @@ function deleteFolder(folderId) {
 const createFolderDialog = document.querySelector(".create-folder-dialog");
 const showCreateFolderDialog = document.querySelector(".create-folder");
 
+const uploadDialog = document.querySelector(".upload-dialog");
+const showUploadDialog = document.querySelector(".upload-file");
+
+const cancelUpload = document.querySelector(".u-cancel");
 const cancelCF = document.querySelector(".c-f-cancel");
+
+showUploadDialog.addEventListener("click", () => {
+  uploadDialog.showModal();
+});
+
+cancelUpload.addEventListener("click", () => {
+  uploadDialog.close();
+});
 
 showCreateFolderDialog.addEventListener("click", () => {
   createFolderDialog.showModal();
@@ -196,5 +208,11 @@ cancelCF.addEventListener("click", () => {
 createFolderDialog.addEventListener("click", (event) => {
   if (event.target === createFolderDialog) {
     createFolderDialog.close();
+  }
+});
+
+uploadDialog.addEventListener("click", (event) => {
+  if (event.target === uploadDialog) {
+    uploadDialog.close();
   }
 });
