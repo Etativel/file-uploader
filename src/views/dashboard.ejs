@@ -234,10 +234,49 @@
               </button>
             </div>
             <div class="file-container">
-              <div>hello</div>
-              <div>hello</div>
-              <div>hello</div>
-              <div>hello</div>
+              <% function formatFileSize(size) { %> <% if (size < 1024) { %> <%=
+              size + ' B' %> <% } else if (size < 1024 * 1024) { %> <%= (size /
+              1024).toFixed(2) + ' KB' %> <% } else if (size < 1024 * 1024 *
+              1024) { %> <%= (size / (1024 * 1024)).toFixed(2) + ' MB' %> <% }
+              else { %> <%= (size / (1024 * 1024 * 1024)).toFixed(2) + ' GB' %>
+              <% } %> <% } %>
+              <table class="main-table">
+                <tr class="column-name">
+                  <th>Name</th>
+                  <th class="th-date">Date uploaded</th>
+                  <th class="th-type">Type</th>
+                  <th class="th-size">Size</th>
+                </tr>
+                <tr class="column-data">
+                  <td class="td-name">Guba dsfsdfsfssdfsfsdfsdfsdffsdf.png</td>
+                  <td class="td-date">12-12-2025</td>
+                  <td class="td-type">PNG</td>
+                  <td class="td-size">12 mb</td>
+                  <td>
+                    <button class="folder-options">
+                      <img src="/icons/dots.png" alt="" class="dot-img" />
+                    </button>
+                  </td>
+                </tr>
+
+                <% folder.files.forEach(file => { %>
+                <tr class="column-data">
+                  <td class="td-name"><%= file.filename %></td>
+                  <td class="td-date">
+                    <%= new Date(file.uploadedAt).toLocaleDateString('en-GB', {
+                    day: 'numeric', month: 'short', year: 'numeric' }) %>
+                  </td>
+                  <td class="td-type"><%= file.mimetype.split("/")[0] %></td>
+                  <td class="td-size"><%= formatFileSize(file.size) %></td>
+
+                  <td>
+                    <button class="folder-options">
+                      <img src="/icons/dots.png" alt="" class="dot-img" />
+                    </button>
+                  </td>
+                </tr>
+                <% }); %>
+              </table>
             </div>
           </section>
         </div>

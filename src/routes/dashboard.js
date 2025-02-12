@@ -53,7 +53,7 @@ router.get("/:folderPath(*)", async (req, res) => {
   if (!folder) {
     return res.status(404).send("Folder not found");
   }
-
+  console.log(folder);
   // Render the dashboard view with the folder data
   res.render("dashboard", {
     local: req.user,
