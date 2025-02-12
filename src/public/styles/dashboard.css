@@ -152,7 +152,7 @@ body {
   border-radius: 12px;
   height: 100%;
   background-color: white;
-  padding: 0px 24px 24px;
+  padding: 0px 24px 24px 24px;
   overflow-y: auto;
   scrollbar-width: thin;
   /* position: sticky; */
@@ -173,8 +173,11 @@ body {
   position: sticky;
   top: 0;
   padding-top: 24px;
-  z-index: 10;
+  z-index: 400;
+  width: 100%;
   background-color: white;
+  border-top: solid white 3px;
+  transform: translateY(-3px);
 }
 
 .hide-component {
@@ -238,7 +241,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  max-width: 50%;
+  max-width: calc(33.33% - 12px);
 }
 
 .folder:hover {
@@ -449,6 +452,14 @@ td {
   padding-left: 12px;
   /* display: flex;
   flex-wrap: wrap; */
+  /* background-color: red; */
+}
+
+.column-name {
+  background-color: white;
+  z-index: 300;
+  position: sticky;
+  top: 100px;
 }
 
 .column-data:hover {
@@ -456,13 +467,42 @@ td {
 }
 
 .td-name {
-  /* max-width: 200px; */
+  max-width: 280px;
   /* background-color: red; */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
   vertical-align: middle;
+}
+
+.th-type,
+.td-type {
+  width: 80px; /* Adjust as needed */
+  text-align: center;
+}
+
+.th-size,
+.td-size {
+  width: 100px; /* Adjust as needed */
+  text-align: center;
+}
+
+.th-opt,
+.td-opt {
+  width: 50px; /* Adjust as needed */
+  text-align: center;
+}
+
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-table th,
+.main-table td {
+  padding: 8px;
+  text-align: left;
 }
 
 @media (max-width: 830px) {
@@ -478,6 +518,9 @@ td {
   .td-date,
   .th-date {
     display: none;
+  }
+  .folder {
+    max-width: 100%;
   }
 }
 
@@ -495,5 +538,8 @@ td {
 @media (max-width: 650px) {
   .sidebar {
     display: none;
+  }
+  .main-content {
+    padding: 0px 0px 24px 24px;
   }
 }

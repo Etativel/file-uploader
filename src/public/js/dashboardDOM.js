@@ -136,7 +136,7 @@ popupButtons.forEach((button, index) => {
   });
 });
 
-document.addEventListener("click", () => {
+document.addEventListener("click", (event) => {
   popups.forEach((popup) => {
     if (
       !popup.contains(event.target) &&
