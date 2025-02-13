@@ -175,6 +175,10 @@ function deleteFolder(folderId) {
     .catch((error) => console.error("Error deleting folder:", error));
 }
 
+function logOut() {
+  window.location.href = "/log-out";
+}
+
 // Dialog
 const createFolderDialog = document.querySelector(".create-folder-dialog");
 const showCreateFolderDialog = document.querySelector(".create-folder");
@@ -214,5 +218,47 @@ createFolderDialog.addEventListener("click", (event) => {
 uploadDialog.addEventListener("click", (event) => {
   if (event.target === uploadDialog) {
     uploadDialog.close();
+  }
+});
+
+// Dark mode toggle
+
+function toggleTheme() {
+  const moonIcon = document.querySelector(".moon-icon");
+  const sunIcon = document.querySelector(".sun-icon");
+
+  // Toggle dark mode
+  if (document.documentElement.classList.contains("dark-mode")) {
+    document.documentElement.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    moonIcon.classList.remove("hidden");
+    sunIcon.classList.add("hidden");
+  } else {
+    document.documentElement.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    moonIcon.classList.add("hidden");
+    sunIcon.classList.remove("hidden");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const storedTheme = localStorage.getItem("theme") || "light";
+
+  if (storedTheme === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  } else {
+    document.documentElement.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+  }
+
+  const moonIcon = document.querySelector(".moon-icon");
+  const sunIcon = document.querySelector(".sun-icon");
+
+  if (document.documentElement.classList.contains("dark-mode")) {
+    moonIcon.classList.add("hidden");
+    sunIcon.classList.remove("hidden");
+  } else {
+    moonIcon.classList.remove("hidden");
+    sunIcon.classList.add("hidden");
   }
 });
