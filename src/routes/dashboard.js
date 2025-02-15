@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 
 // Route for handling folder navigation
 router.get("/:folderPath(*)", async (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   const folderPath = req.params.folderPath;
 
   // Ensure the route only runs for "dashboard" or subfolders inside it
@@ -49,11 +49,11 @@ router.get("/:folderPath(*)", async (req, res) => {
   });
 
   // If the folder doesn't exist, return a 404
-  console.log(fullPath);
+  // console.log(fullPath);
   if (!folder) {
     return res.status(404).send("Folder not found");
   }
-  console.log(folder);
+  // console.log(folder);
   // Render the dashboard view with the folder data
   res.render("dashboard", {
     local: req.user,

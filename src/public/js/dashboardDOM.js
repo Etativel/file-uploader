@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
   const firstSegment = path.split("/")[1];
 
-  console.log("First URL Segment:", firstSegment);
+  // console.log("First URL Segment:", firstSegment);
 
   if (firstSegment === "dashboard") {
     dashboard.classList.add("active");
