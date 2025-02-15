@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const fs = require("fs-extra");
 const prisma = new PrismaClient();
-
+const cloudinary = require("../config/cloudinaryConfig");
 // DELETE
 
 async function deleteFile(req, res) {
@@ -15,7 +15,9 @@ async function deleteFile(req, res) {
     if (!file) {
       return res.status(404).json({ error: "File not found" });
     }
-    await fs.remove(file.filepath);
+    // const publicId = `uploads/${file.filename}`;
+    await cloudinary.uploader.destroy(file.filename);
+    // console.log("filename file", file.filename);
     await prisma.file.delete({
       where: { id: parseInt(fileId) },
     });
