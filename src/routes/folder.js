@@ -29,6 +29,15 @@ router.post("/dashboard/create", async (req, res) => {
       return res.status(400).send("Folder already exists");
     }
 
+    // let finalFolderPath = folderPath;
+    // let counter = 1;
+    // while (
+    //   await prisma.folder.findUnique({ where: { path: finalFolderPath } })
+    // ) {
+    //   finalFolderPath = `${folderPath} (${counter})`;
+    //   counter++;
+    // }
+
     // Find the parent folder
     let parentFolder = await prisma.folder.findUnique({
       where: { path: parentPath },

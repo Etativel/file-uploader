@@ -74,6 +74,9 @@ a {
   color: var(--anchor-text);
 }
 
+button {
+}
+
 .toggle-theme {
   display: flex;
   align-items: center;
@@ -763,6 +766,9 @@ td {
 }
 
 @media (max-width: 650px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
   .sidebar {
     /* display: none; */
     position: absolute;
