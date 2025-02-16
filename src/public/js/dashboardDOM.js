@@ -148,6 +148,29 @@ document.addEventListener("click", (event) => {
   });
 });
 
+// Delete file dialog
+
+const deleteFolderBtn = document.querySelector(".delete-folder-btn");
+const deleteFolderDialog = document.querySelector(".delete-folder-dialog");
+const cancelDeleteFolder = document.querySelector(".cancel-del-fold-btn");
+const confirmDeleteFolder = document.querySelector(".confirm-del-fold-btn");
+
+if (deleteFolderBtn) {
+  deleteFolderBtn.addEventListener("click", () => {
+    deleteFolderDialog.showModal();
+  });
+
+  cancelDeleteFolder.addEventListener("click", () => {
+    deleteFolderDialog.close();
+  });
+
+  deleteFolderDialog.addEventListener("click", (event) => {
+    if (event.target === deleteFolderDialog) {
+      deleteFolderDialog.close();
+    }
+  });
+}
+
 function deleteFile(fileId) {
   if (!confirm("Are you sure you want to delete this file?")) return;
 
@@ -163,14 +186,12 @@ function deleteFile(fileId) {
     .catch((error) => console.error("Error deleting file:", error));
 }
 function deleteFolder(folderId) {
-  if (!confirm("Are you sure to delete the folder and its content?")) return;
-
   fetch(`/dashboard/delete-folder/${folderId}`, {
     method: "DELETE",
   })
     .then((response) => response.json())
     .then((data) => {
-      alert(data.message);
+      // alert(data.message);
       location.reload();
     })
     .catch((error) => console.error("Error deleting folder:", error));

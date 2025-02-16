@@ -492,6 +492,7 @@ body {
   background-color: var(--table-hover);
 }
 
+.delete-folder-dialog,
 .upload-dialog,
 .create-folder-dialog {
   position: fixed;
@@ -531,6 +532,58 @@ body {
   padding-left: 55%;
   display: flex;
   gap: 24px;
+}
+
+/* delete folder dialog */
+.dialog-ctr.delete-folder {
+  background-color: var(--main-content-background);
+  border: solid var(--reverse-border-color) 1px;
+  border-radius: 12px;
+}
+.delete-folder-btn-ctr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-folder-notif {
+  text-align: center;
+  color: var(--anchor-text);
+  font-size: 1.1rem;
+}
+
+.delete-folder-notif-sub {
+  text-align: center;
+  color: gray;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.confirm-del-fold-btn,
+.cancel-del-fold-btn {
+  padding: 12px 24px;
+  color: white;
+  border-radius: 6px;
+  border: solid 1px transparent;
+  cursor: pointer;
+}
+
+.cancel-del-fold-btn {
+  background-color: #c1c1c1;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-del-fold-btn:hover {
+  background-color: #a9a9a9;
+}
+
+.confirm-del-fold-btn {
+  background-color: #f15e5e;
+
+  transition: background-color 0.3s ease;
+}
+
+.confirm-del-fold-btn:hover {
+  background-color: #d95555;
 }
 
 .folder-name-input {
@@ -716,6 +769,7 @@ td {
     height: 100vh;
     z-index: 500;
     opacity: 0;
+    width: 80%;
     transform: translateX(-1%);
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
