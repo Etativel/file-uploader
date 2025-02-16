@@ -178,7 +178,7 @@ function logOut() {
   window.location.href = "/log-out";
 }
 
-// Dialog
+// Delete
 const createFolderDialog = document.querySelector(".create-folder-dialog");
 const showCreateFolderDialog = document.querySelector(".create-folder");
 
@@ -296,30 +296,65 @@ mainSidebarToggle.addEventListener("click", () => {
   }
 });
 
-// Delete file dialog
+// Delete folder dialog
 
-const deleteFolderBtn = document.querySelector(".delete-folder-btn");
-const deleteFolderDialog = document.querySelector(".delete-folder-dialog");
-const cancelDeleteFolder = document.querySelector(".cancel-del-fold-btn");
-const confirmDeleteFolder = document.querySelector(".confirm-del-fold-btn");
+const deleteFolderBtns = document.querySelectorAll(".delete-folder-btn");
+const deleteFolderDialog = document.querySelectorAll(".delete-folder-dialog");
 
-if (deleteFolderBtn) {
-  deleteFolderBtn.addEventListener("click", () => {
-    deleteFolderDialog.showModal();
-  });
-
-  cancelDeleteFolder.addEventListener("click", () => {
-    deleteFolderDialog.close();
-  });
-
-  deleteFolderDialog.addEventListener("click", (event) => {
-    if (event.target === deleteFolderDialog) {
-      deleteFolderDialog.close();
+deleteFolderBtns.forEach((btn) => {
+  // get closest popup
+  const popup = btn.closest(".popup");
+  const dialog = popup.querySelector(".delete-folder-dialog");
+  btn.addEventListener("click", () => {
+    if (dialog) {
+      dialog.showModal();
     }
   });
-}
+});
 
-// View fie
+deleteFolderDialog.forEach((dialog) => {
+  const cancelBtn = dialog.querySelector(".cancel-del-fold-btn");
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      dialog.close();
+    });
+  }
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+});
+
+// View file
 function viewFile(link) {
   window.open(link, "_blank");
+}
+
+// Download file
+function downloadFile(fileUrl, fileName = "download") {
+  const downloadUrl = fileUrl.includes("?")
+    ? `${fileUrl}&fl_attachment=true`
+    : `${fileUrl}?fl_attachment=true`;
+
+  fetch(downloadUrl, { mode: "cors" })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+    })
+    .catch((error) => {
+      console.error("Download error:", error);
+    });
 }

@@ -428,8 +428,8 @@
                 </tr>
                 <div class="popup">
                   <button
-                    class="opt-btn delete-btn"
-                    onclick="deleteFile('<%= file.id %>')"
+                    class="opt-btn download-file-btn"
+                    onclick="downloadFile('<%= file.filepath %>', '<%= cleanFilename %>')"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
