@@ -111,6 +111,7 @@ popupButtons.forEach((button, index) => {
   const popup = popups[index];
 
   button.addEventListener("click", (event) => {
+    event.stopPropagation();
     if (popup.style.display === "block") {
       popup.style.display = "none";
     } else {
