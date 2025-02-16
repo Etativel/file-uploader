@@ -262,3 +262,37 @@ document.addEventListener("DOMContentLoaded", () => {
     sunIcon.classList.add("hidden");
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  //add hidden if on mobile
+  if (window.innerWidth <= 650) {
+    sidebar.classList.add("hidden");
+  }
+});
+
+const sidebarToggle = document.querySelector(".sidebar-toggle");
+const mainSidebarToggle = document.querySelector(".sidebar-toggle.main");
+const sidebar = document.querySelector(".sidebar");
+sidebarToggle.addEventListener("click", () => {
+  mainSidebarToggle.classList.remove("hidden");
+  sidebarToggle.classList.add("hidden");
+  if (sidebar.classList.contains("hidden")) {
+    sidebar.classList.remove("hidden");
+    sidebar.classList.add("show");
+  } else {
+    sidebar.classList.add("hidden");
+    sidebar.classList.remove("show");
+  }
+});
+
+mainSidebarToggle.addEventListener("click", () => {
+  mainSidebarToggle.classList.add("hidden");
+  sidebarToggle.classList.remove("hidden");
+  if (sidebar.classList.contains("hidden")) {
+    sidebar.classList.remove("hidden");
+    sidebar.classList.add("show");
+  } else {
+    sidebar.classList.add("hidden");
+    sidebar.classList.remove("show");
+  }
+});

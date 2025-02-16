@@ -1,5 +1,4 @@
 const { PrismaClient } = require("@prisma/client");
-const fs = require("fs-extra");
 const prisma = new PrismaClient();
 const cloudinary = require("../config/cloudinaryConfig");
 // DELETE

@@ -16,6 +16,22 @@
             <img src="/icons/folder.png" class="header-icon" />
             <p class="header-web-title-text">Drive</p>
           </div>
+          <button class="sidebar-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="size-6 sidebar-toggle-icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
         </div>
         <div class="add-btn-ctr">
           <button class="add-btn folder-options">
@@ -122,6 +138,22 @@
         <div class="main-header">
           <div class="search-input-ctr">
             <!-- <input type="text" placeholder="search-bar" /> -->
+            <button class="sidebar-toggle main hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="{1.5}"
+                stroke="currentColor"
+                class="size-6 sidebar-toggle-icon"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </button>
           </div>
           <div class="profile-pict-ctr">
             <button class="toggle-theme" onclick="toggleTheme()">
@@ -328,7 +360,9 @@
                 </tr>
                 <% folder.files.forEach(file => { %>
                 <tr class="column-data">
-                  <td class="td-name"><%= file.filename %></td>
+                  <% const cleanFilename =
+                  file.filename.replace(/^uploads\/\d+-/, "") %>
+                  <td class="td-name"><%= cleanFilename %></td>
                   <td class="td-date">
                     <%= new Date(file.uploadedAt).toLocaleDateString('en-GB', {
                     day: 'numeric', month: 'short', year: 'numeric' }) %>

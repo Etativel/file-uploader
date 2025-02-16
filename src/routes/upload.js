@@ -1,7 +1,7 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const path = require("path");
-const upload = require("../middlewares/upload");
+const upload = require("../middlewares/multer");
 const fs = require("fs-extra");
 
 const router = express.Router();
