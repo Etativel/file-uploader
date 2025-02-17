@@ -357,3 +357,18 @@ function downloadFile(fileUrl, fileName = "download") {
       console.error("Download error:", error);
     });
 }
+
+// Check max size
+const fileInput = document.querySelector(".choose-file");
+const maxFileSize = 10 * 1024 * 1024; // 10MB
+
+fileInput.addEventListener("change", function () {
+  const files = fileInput.files;
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > maxFileSize) {
+      alert(`Some file exceeds the maximum size of 10MB.`);
+      fileInput.value = "";
+      break;
+    }
+  }
+});
