@@ -360,7 +360,7 @@ function downloadFile(fileUrl, fileName = "download") {
 
 // Check max size
 const fileInput = document.querySelector(".choose-file");
-const maxFileSize = 10 * 1024 * 1024; // 10MB
+const maxFileSize = 10 * 1024 * 1024;
 
 fileInput.addEventListener("change", function () {
   const files = fileInput.files;
@@ -372,3 +372,25 @@ fileInput.addEventListener("change", function () {
     }
   }
 });
+
+// Share clipboard
+async function shareClipboard(link) {
+  const clipboardAlert = document.querySelector(".clip-board");
+
+  try {
+    await navigator.clipboard.writeText(link);
+
+    clipboardAlert.classList.add("show");
+
+    if (clipboardAlert.timeoutId) {
+      clearTimeout(clipboardAlert.timeoutId);
+    }
+
+    clipboardAlert.timeoutId = setTimeout(() => {
+      clipboardAlert.classList.remove("show");
+      clipboardAlert.timeoutId = null;
+    }, 3000);
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+  }
+}

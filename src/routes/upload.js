@@ -13,11 +13,9 @@ router.post(
     upload.array("file")(req, res, (err) => {
       if (err) {
         if (err.message === "File extension not allowed") {
-          return res
-            .status(400)
-            .json({
-              error: "File type not allowed. Please upload a valid file.",
-            });
+          return res.status(400).json({
+            error: "File type not allowed. Please upload a valid file.",
+          });
         }
         if (err.code === "LIMIT_FILE_SIZE") {
           return res

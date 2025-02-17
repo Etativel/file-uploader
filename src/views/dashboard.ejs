@@ -475,8 +475,8 @@
                     <p>View</p>
                   </button>
                   <button
-                    class="opt-btn delete-btn"
-                    onclick="deleteFile('<%= file.id %>')"
+                    class="opt-btn share-btn"
+                    onclick="shareClipboard('<%= file.filepath %>')"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -577,5 +577,6 @@
         </form>
       </div>
     </dialog>
+    <div class="clip-board">Link copied to clipboard</div>
   </body>
 </html>

@@ -12,6 +12,7 @@ const uploadRouter = require("./routes/upload");
 const fileRouter = require("./routes/folder");
 const fileManagementRouter = require("./routes/fileManagementRouter");
 const folderManagementRouter = require("./routes/folderManagementRouter");
+const downloadRouter = require("./routes/download");
 // Initialization
 session(app);
 app.use(express.static(assetPath));
@@ -29,6 +30,7 @@ app.use("/", fileRouter);
 app.use("/", uploadRouter);
 app.use("/", fileManagementRouter);
 app.use("/", folderManagementRouter);
+// app.use("/", downloadRouter);
 app.get("/", (req, res) => {
   if (req.user) {
     return res.redirect("/dashboard");
