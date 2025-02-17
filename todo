@@ -1,4 +1,6 @@
 change folder name
-preview file
 share file
-download file
+
+check file size of max 10mb to prevent error
+
+fix the multer  filter format

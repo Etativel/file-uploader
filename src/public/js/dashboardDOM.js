@@ -336,7 +336,6 @@ function downloadFile(fileUrl, fileName = "download") {
   const downloadUrl = fileUrl.includes("?")
     ? `${fileUrl}&fl_attachment=true`
     : `${fileUrl}?fl_attachment=true`;
-
   fetch(downloadUrl, { mode: "cors" })
     .then((response) => {
       if (!response.ok) {

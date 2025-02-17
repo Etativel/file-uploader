@@ -558,7 +558,7 @@
           action="/dashboard/<%= folder.path.replace('uploads/', '') %>/upload"
           method="post"
           enctype="multipart/form-data"
-          class="u-form"
+          class="u-form upload-file"
         >
           <input
             type="file"
@@ -566,6 +566,8 @@
             required
             class="choose-file"
             multiple
+            accept=".jpg, .jpeg, .png, .gif, .webp, .avif, .svg, .bmp, .tiff, .mp4, 
+            .webm, .mov, .avi, .flv, .mp3, .ogg, .wav, .pdf, .zip, .docx, .psd"
           />
           <input type="hidden" name="userId" value="<%= local.id %>" />
           <div class="u-btn">
