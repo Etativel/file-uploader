@@ -7,4 +7,6 @@ router.delete(
   folderController.deleteFolder
 );
 
+router.post("/update-folder", folderController.renameFolder);
+
 module.exports = router;

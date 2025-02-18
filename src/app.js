@@ -12,7 +12,7 @@ const uploadRouter = require("./routes/upload");
 const fileRouter = require("./routes/folder");
 const fileManagementRouter = require("./routes/fileManagementRouter");
 const folderManagementRouter = require("./routes/folderManagementRouter");
-const downloadRouter = require("./routes/download");
+// const downloadRouter = require("./routes/download");
 // Initialization
 session(app);
 app.use(express.static(assetPath));

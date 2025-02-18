@@ -514,6 +514,7 @@ body {
   background-color: var(--table-hover);
 }
 
+.update-folder-dialog,
 .delete-folder-dialog,
 .upload-dialog,
 .create-folder-dialog {
@@ -532,6 +533,7 @@ body {
 }
 
 .u-form,
+.u-f-form,
 .c-f-form {
   display: flex;
   flex-direction: column;
@@ -621,8 +623,14 @@ body {
   box-shadow: 0 0 2px var(--btn-blue-text);
 }
 
+.folder-id {
+  display: none;
+}
+
 .u-cancel,
 .u-submit,
+.u-f-cancel,
+.u-f-submit,
 .c-f-cancel,
 .c-f-submit {
   color: var(--btn-blue-text);

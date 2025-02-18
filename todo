@@ -1,1 +1,4 @@
-change folder name
+change folder name (100%)
+
+fix redirect path, still using old path even the folder name has change.
+path need to be change according to the new name (BAD)

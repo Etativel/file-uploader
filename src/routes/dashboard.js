@@ -34,13 +34,51 @@ router.get("/:folderPath(*)", async (req, res) => {
     });
   }
 
+  // const folder = await prisma.folder.findUnique({
+  //   where: { path: fullPath },
+  //   include: {
+  //     subfolders: true,
+  //     files: {
+  //       orderBy: {
+  //         uploadedAt: "desc",
+  //       },
+  //     },
+  //   },
+  // });
+
   const folder = await prisma.folder.findUnique({
     where: { path: fullPath },
-    include: {
-      subfolders: true,
+    select: {
+      id: true,
+      name: true,
+      path: true,
+      userId: true,
+      parentId: true,
+      subfolders: {
+        orderBy: {
+          id: "asc",
+        },
+        select: {
+          id: true,
+          name: true,
+          path: true,
+          userId: true,
+          parentId: true,
+        },
+      },
       files: {
         orderBy: {
           uploadedAt: "desc",
+        },
+        select: {
+          id: true,
+          filename: true,
+          filepath: true,
+          mimetype: true,
+          size: true,
+          uploadedAt: true,
+          userId: true,
+          folderId: true,
         },
       },
     },

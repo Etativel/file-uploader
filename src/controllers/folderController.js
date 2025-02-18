@@ -64,6 +64,25 @@ async function deleteFolder(req, res) {
   }
 }
 
+// UPDATE
+async function renameFolder(req, res) {
+  if (!req.body) {
+    res.redirect("/dashboard");
+  }
+  const { folderName, folderId } = req.body;
+
+  await prisma.folder.update({
+    where: {
+      id: parseInt(folderId),
+    },
+    data: {
+      name: folderName,
+    },
+  });
+
+  res.redirect("/dashboard");
+}
 module.exports = {
   deleteFolder,
+  renameFolder,
 };

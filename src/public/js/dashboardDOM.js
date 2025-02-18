@@ -178,7 +178,8 @@ function logOut() {
   window.location.href = "/log-out";
 }
 
-// Delete
+// Folder dialog
+
 const createFolderDialog = document.querySelector(".create-folder-dialog");
 const showCreateFolderDialog = document.querySelector(".create-folder");
 
@@ -394,3 +395,39 @@ async function shareClipboard(link) {
     console.error("Failed to copy: ", err);
   }
 }
+
+// Rename folder
+
+const showUpdateFolderDialog = document.querySelectorAll(".rename-folder-btn");
+const updateFolderDialog = document.querySelector(".update-folder-dialog");
+const cancelRenameFolder = document.querySelector(".u-f-cancel");
+
+cancelRenameFolder.addEventListener("click", () => {
+  updateFolderDialog.close();
+});
+
+if (showUpdateFolderDialog) {
+  showUpdateFolderDialog.forEach((show) => {
+    const currentFolderContainer = show.closest(".parent-folder");
+    const folderName = currentFolderContainer.querySelector(".folder-name");
+    const folderNameInput =
+      updateFolderDialog.querySelector(".folder-name-input");
+    const folderIdInput = updateFolderDialog.querySelector(".folder-id");
+    const folderId = currentFolderContainer.querySelector(".folder-id");
+    show.addEventListener("click", () => {
+      folderNameInput.value = folderName.textContent;
+      folderIdInput.value = folderId.textContent;
+      updateFolderDialog.showModal();
+    });
+  });
+}
+
+updateFolderDialog.addEventListener("click", (event) => {
+  if (event.target === updateFolderDialog) {
+    updateFolderDialog.close();
+  }
+});
+
+cancelRenameFolder.addEventListener("click", () => {
+  uploadDialog.close();
+});
