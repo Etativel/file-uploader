@@ -67,20 +67,73 @@ async function deleteFolder(req, res) {
 // UPDATE
 async function renameFolder(req, res) {
   if (!req.body) {
-    res.redirect("/dashboard");
+    return res.redirect("/dashboard");
   }
+
   const { folderName, folderId } = req.body;
 
+  const folder = await prisma.folder.findUnique({
+    where: { id: parseInt(folderId) },
+  });
+
+  if (!folder) {
+    return res.status(404).send("Folder not found");
+  }
+
+  const oldPath = folder.path;
+  const parentFolder = folder.parentId
+    ? await prisma.folder.findUnique({ where: { id: folder.parentId } })
+    : null;
+
+  const newParentPath = parentFolder
+    ? parentFolder.path
+    : `uploads/dashboard-${req.user.id}`;
+  const newPath = `${newParentPath}/${folderName}`.replace(/\/\//g, "/");
+
   await prisma.folder.update({
-    where: {
-      id: parseInt(folderId),
-    },
+    where: { id: parseInt(folderId) },
     data: {
       name: folderName,
+      path: newPath,
     },
   });
 
-  res.redirect("/dashboard");
+  await updateChildFolderPaths(folderId, oldPath, newPath);
+
+  const basePath = `uploads/dashboard-${req.user.id}/`;
+  const redirectPath = newParentPath.startsWith(basePath)
+    ? newParentPath.slice(basePath.length)
+    : newParentPath;
+
+  console.log("redirect path", basePath);
+
+  // Check if the update happen on the highest parent and redirect it to the /dashboard
+  if (!redirectPath || redirectPath === `uploads/dashboard-${req.user.id}`) {
+    return res.redirect("/dashboard");
+  }
+
+  res.redirect(`/dashboard/${redirectPath}`);
+
+  // res.redirect("/dashboard/${redirectPath}") ;
+}
+
+// recursive function to update subfolder paths
+async function updateChildFolderPaths(parentId, oldPath, newPath) {
+  const subfolders = await prisma.folder.findMany({
+    where: { parentId: parseInt(parentId) },
+  });
+
+  for (const subfolder of subfolders) {
+    const updatedChildPath = subfolder.path.replace(oldPath, newPath);
+
+    await prisma.folder.update({
+      where: { id: subfolder.id },
+      data: { path: updatedChildPath },
+    });
+
+    // update deeper subfolders
+    await updateChildFolderPaths(subfolder.id, oldPath, newPath);
+  }
 }
 module.exports = {
   deleteFolder,

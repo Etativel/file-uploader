@@ -72,11 +72,12 @@ function toggleVisibility(section) {
   }
 }
 
-function redirectPageToFolder(folderPath) {
-  if (folderPath) {
-    window.location.href = `/dashboard/${folderPath}`;
+function redirectPageToFolder(folderName) {
+  if (folderName) {
+    const currentPath = window.location.origin + window.location.pathname;
+    window.location.href = `${currentPath}/${folderName}`;
   } else {
-    console.error("Invalid folder path:", folderPath);
+    console.error("Invalid folder path:", folderName);
   }
 }
 
