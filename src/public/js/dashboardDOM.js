@@ -432,3 +432,34 @@ updateFolderDialog.addEventListener("click", (event) => {
 cancelRenameFolder.addEventListener("click", () => {
   uploadDialog.close();
 });
+
+// Share zip folder
+
+// const shareFolderBtn = document.querySelector(".share-folder-btn")
+
+// if (shareFolderBtn){
+//   shareFolderBtn.forEach((folder)=>{
+//     const parentFolder = folder.closest('.parent-folder')
+//     const folderId = parentFolder.querySelector("")
+
+//   })
+// }
+
+function shareZipFolder(folderId) {
+  console.log("folder id", folderId);
+  fetch(`/share-folder/${folderId}`, {
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.downloadLink) {
+        window.location.href = data.downloadLink;
+      } else {
+        alert("Failed to generate ZIP.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("An error occurred while generating the ZIP file.");
+    });
+}

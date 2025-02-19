@@ -130,12 +130,71 @@ async function updateChildFolderPaths(parentId, oldPath, newPath) {
       where: { id: subfolder.id },
       data: { path: updatedChildPath },
     });
-
-    // update deeper subfolders
     await updateChildFolderPaths(subfolder.id, oldPath, newPath);
   }
 }
+
+// Share zip folder
+async function getAllFilesInFolder(folderId) {
+  // Get the main folder
+  const folder = await prisma.folder.findUnique({ where: { id: folderId } });
+  if (!folder) return [];
+
+  // Get all subfolders recursively
+  const subfolders = await getAllSubfolders(folderId);
+  const allFolderIds = [folderId, ...subfolders.map((f) => f.id)];
+
+  // Fetch all files in the folder and subfolders
+  return await prisma.file.findMany({
+    where: { folderId: { in: allFolderIds } },
+  });
+}
+
+async function shareZipFolder(req, res) {
+  try {
+    const { folderId } = req.params;
+    const files = await getAllFilesInFolder(folderId);
+
+    if (files.length === 0) {
+      return res.status(404).json({ error: "No files found in this folder" });
+    }
+
+    // Create ZIP in memory
+    const archive = archiver("zip", { zlib: { level: 9 } });
+    const zipBuffer = [];
+
+    archive.on("data", (chunk) => zipBuffer.push(chunk));
+    archive.on("end", async () => {
+      const finalBuffer = Buffer.concat(zipBuffer);
+
+      // Upload ZIP to Cloudinary
+      const uploadResponse = await cloudinary.uploader.upload_stream(
+        { resource_type: "raw", folder: "zipped_folders" },
+        async (error, result) => {
+          if (error) {
+            console.error("Cloudinary upload error:", error);
+            return res.status(500).json({ error: "Failed to upload ZIP" });
+          }
+          res.json({ downloadLink: result.secure_url });
+        }
+      );
+      uploadResponse.end(finalBuffer);
+    });
+
+    for (const file of files) {
+      const response = await axios.get(file.url, { responseType: "stream" });
+      archive.append(response.data, { name: file.path });
+    }
+
+    archive.finalize();
+  } catch (error) {
+    console.error("Error zipping folder:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   deleteFolder,
   renameFolder,
+  shareZipFolder,
 };

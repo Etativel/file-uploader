@@ -12,6 +12,7 @@ const uploadRouter = require("./routes/upload");
 const fileRouter = require("./routes/folder");
 const fileManagementRouter = require("./routes/fileManagementRouter");
 const folderManagementRouter = require("./routes/folderManagementRouter");
+const shareFolderRouter = require("./routes/downloadZip");
 // const downloadRouter = require("./routes/download");
 // Initialization
 session(app);
@@ -30,6 +31,7 @@ app.use("/", fileRouter);
 app.use("/", uploadRouter);
 app.use("/", fileManagementRouter);
 app.use("/", folderManagementRouter);
+app.use("/", shareFolderRouter);
 // app.use("/", downloadRouter);
 app.get("/", (req, res) => {
   if (req.user) {
