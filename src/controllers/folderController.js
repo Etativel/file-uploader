@@ -2,7 +2,8 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const fs = require("fs-extra");
 const cloudinary = require("../config/cloudinaryConfig");
-
+const axios = require("axios");
+const archiver = require("archiver");
 // DELETE
 async function getAllSubfolders(folderId) {
   let subfolders = await prisma.folder.findMany({
@@ -135,31 +136,37 @@ async function updateChildFolderPaths(parentId, oldPath, newPath) {
 }
 
 // Share zip folder
+
 async function getAllFilesInFolder(folderId) {
-  // Get the main folder
-  const folder = await prisma.folder.findUnique({ where: { id: folderId } });
+  // get the main folder
+  const folder = await prisma.folder.findUnique({
+    where: { id: folderId },
+  });
   if (!folder) return [];
 
-  // Get all subfolders recursively
+  // get all subfolders
   const subfolders = await getAllSubfolders(folderId);
   const allFolderIds = [folderId, ...subfolders.map((f) => f.id)];
 
-  // Fetch all files in the folder and subfolders
+  // fetch all files in the folder and subfolders
   return await prisma.file.findMany({
     where: { folderId: { in: allFolderIds } },
   });
 }
 
+const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
+const expiredFiles = new Map(); // Store fileId and expiration timestamps
+
 async function shareZipFolder(req, res) {
   try {
     const { folderId } = req.params;
-    const files = await getAllFilesInFolder(folderId);
+    const convertFid = parseInt(folderId);
+    const files = await getAllFilesInFolder(convertFid);
 
     if (files.length === 0) {
-      return res.status(404).json({ error: "No files found in this folder" });
+      return res.status(200).json({ empty: true });
     }
 
-    // Create ZIP in memory
     const archive = archiver("zip", { zlib: { level: 9 } });
     const zipBuffer = [];
 
@@ -167,23 +174,39 @@ async function shareZipFolder(req, res) {
     archive.on("end", async () => {
       const finalBuffer = Buffer.concat(zipBuffer);
 
-      // Upload ZIP to Cloudinary
-      const uploadResponse = await cloudinary.uploader.upload_stream(
-        { resource_type: "raw", folder: "zipped_folders" },
-        async (error, result) => {
-          if (error) {
-            console.error("Cloudinary upload error:", error);
-            return res.status(500).json({ error: "Failed to upload ZIP" });
+      cloudinary.uploader
+        .upload_stream(
+          {
+            resource_type: "raw",
+            folder: "zipped_folders",
+            public_id: `folder-${folderId}.zip`,
+          },
+          async (error, result) => {
+            if (error) {
+              console.error("Cloudinary upload error:", error);
+              return res.status(500).json({ error: "Failed to upload ZIP" });
+            }
+
+            const fileId = result.public_id;
+            expiredFiles.set(fileId, Date.now() + EXPIRATION_TIME);
+
+            setTimeout(() => deleteExpiredFile(fileId), EXPIRATION_TIME);
+
+            res.json({
+              downloadLink: result.secure_url,
+              expiresAt: expiredFiles.get(fileId),
+            });
           }
-          res.json({ downloadLink: result.secure_url });
-        }
-      );
-      uploadResponse.end(finalBuffer);
+        )
+        .end(finalBuffer);
     });
 
     for (const file of files) {
-      const response = await axios.get(file.url, { responseType: "stream" });
-      archive.append(response.data, { name: file.path });
+      const response = await axios.get(file.filepath, {
+        responseType: "stream",
+      });
+      const fileName = file.filepath.split("/").pop();
+      archive.append(response.data, { name: fileName });
     }
 
     archive.finalize();
@@ -192,6 +215,23 @@ async function shareZipFolder(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+async function deleteExpiredFile(fileId) {
+  const expirationTime = expiredFiles.get(fileId);
+  if (expirationTime && Date.now() >= expirationTime) {
+    try {
+      await cloudinary.uploader.destroy(fileId, { resource_type: "raw" });
+      console.log(`Deleted expired file: ${fileId}`);
+      expiredFiles.delete(fileId);
+    } catch (error) {
+      console.error(`Failed to delete expired file: ${fileId}`, error);
+    }
+  }
+}
+
+module.exports = {
+  shareZipFolder,
+};
 
 module.exports = {
   deleteFolder,

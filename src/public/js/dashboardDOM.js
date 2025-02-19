@@ -445,15 +445,49 @@ cancelRenameFolder.addEventListener("click", () => {
 //   })
 // }
 
+const shareFolderDialog = document.querySelector(".share-folder-dialog");
+
+const linkContainer = document.querySelector(".dialog-ctr.share-folder");
+
 function shareZipFolder(folderId) {
   console.log("folder id", folderId);
+  shareFolderDialog.showModal();
+  linkContainer.innerHTML = `
+  <div class="loading-link">Zipping folder</div>
+  `;
   fetch(`/share-folder/${folderId}`, {
     method: "POST",
   })
     .then((response) => response.json())
     .then((data) => {
+      if (data.empty) {
+        alert("This folder is empty");
+        return;
+      }
       if (data.downloadLink) {
-        window.location.href = data.downloadLink;
+        // window.location.href = data.downloadLink;
+        const expirationTime = new Date(data.expiresAt).toLocaleString();
+        linkContainer.innerHTML = `
+                      <input
+                        type="text"
+                        value="${data.downloadLink}"
+                        class="share-folder-link"
+                        readonly
+                        onclick="this.select()"
+                      />
+                      <p>${expirationTime}</p>
+                      <div class="share-folder-btn-ctr">
+                        <button class="copy-folder-link-btn">Copy link</button>
+                      </div>
+        `;
+        const copyLinkBtn = document.querySelector(".copy-folder-link-btn");
+        copyLinkBtn.addEventListener("click", async () => {
+          await navigator.clipboard.writeText(data.downloadLink);
+          shareFolderDialog.close();
+          setTimeout(() => {
+            alert("Link copied");
+          }, 0);
+        });
       } else {
         alert("Failed to generate ZIP.");
       }

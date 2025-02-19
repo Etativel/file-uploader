@@ -516,6 +516,7 @@ body {
 
 .update-folder-dialog,
 .delete-folder-dialog,
+.share-folder-dialog,
 .upload-dialog,
 .create-folder-dialog {
   position: fixed;
@@ -564,6 +565,8 @@ body {
   border: solid var(--reverse-border-color) 1px;
   border-radius: 12px;
 }
+
+.share-folder-btn-ctr,
 .delete-folder-btn-ctr {
   display: flex;
   justify-content: space-between;
