@@ -37,13 +37,25 @@
               type="text"
               placeholder="username"
               class="input-box username-input"
+              value="<%= value.username %>"
             />
+            <% if (value.usernameError) { %>
+            <div class="error-message">
+              <p><%= value.usernameError %></p>
+            </div>
+            <% } %>
             <input
               name="password"
               type="text"
               placeholder="password"
               class="input-box password-input"
+              value="<%= value.password %>"
             />
+            <% if (value.passwordError) { %>
+            <div class="error-message">
+              <p><%= value.passwordError %></p>
+            </div>
+            <% } %>
             <button type="submit" class="submit-btn">Sign in</button>
           </form>
           <div class="sign-up-info">

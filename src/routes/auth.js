@@ -46,10 +46,18 @@ router.post("/sign-up", authController.registerUser);
 router.get("/sign-in", authController.getLoginForm);
 router.post(
   "/sign-in",
+
+  (req, res, next) => {
+    req.flash("loginFormData", {
+      username: req.body.username,
+      password: req.body.password,
+    });
+    next();
+  },
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/sign-in",
-    // failureFlash: true,
+    failureFlash: true,
   })
 );
 router.get("/log-out", (req, res, next) => {

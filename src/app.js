@@ -16,12 +16,14 @@ const shareFolderRouter = require("./routes/downloadZip");
 // const downloadRouter = require("./routes/download");
 // Initialization
 session(app);
+const flash = require("connect-flash");
 app.use(express.static(assetPath));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

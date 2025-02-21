@@ -10,6 +10,15 @@
   --dark-blue: #174ea6;
 }
 
+.error-message {
+  font-size: medium;
+  padding-left: 12px;
+  /* padding-bottom: 12px; */
+  color: red;
+  opacity: 90%;
+  transform: translateY(-40%);
+}
+
 .container {
   height: fit-content;
   /* background-color: red; */
