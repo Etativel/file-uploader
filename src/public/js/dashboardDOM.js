@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const storedTheme = localStorage.getItem("theme") || "light";
+
+  if (storedTheme === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  } else {
+    document.documentElement.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+  }
+
+  const moonIcon = document.querySelector(".moon-icon");
+  const sunIcon = document.querySelector(".sun-icon");
+
+  if (document.documentElement.classList.contains("dark-mode")) {
+    moonIcon.classList.add("hidden");
+    sunIcon.classList.remove("hidden");
+  } else {
+    moonIcon.classList.remove("hidden");
+    sunIcon.classList.add("hidden");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const dashboard = document.querySelector(".dashboard");
   const home = document.querySelector(".home");
 
@@ -150,14 +172,14 @@ document.addEventListener("click", (event) => {
 });
 
 function deleteFile(fileId) {
-  if (!confirm("Are you sure you want to delete this file?")) return;
+  // if (!confirm("Are you sure you want to delete this file?")) return;
 
   fetch(`/dashboard/delete/${fileId}`, {
     method: "DELETE",
   })
     .then((response) => response.json())
     .then((data) => {
-      alert(data.message);
+      // alert(data.message);
       // Refresh the page to update the file list
       location.reload();
     })
@@ -241,28 +263,6 @@ function toggleTheme() {
     sunIcon.classList.remove("hidden");
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const storedTheme = localStorage.getItem("theme") || "light";
-
-  if (storedTheme === "dark") {
-    document.documentElement.classList.add("dark-mode");
-  } else {
-    document.documentElement.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-  }
-
-  const moonIcon = document.querySelector(".moon-icon");
-  const sunIcon = document.querySelector(".sun-icon");
-
-  if (document.documentElement.classList.contains("dark-mode")) {
-    moonIcon.classList.add("hidden");
-    sunIcon.classList.remove("hidden");
-  } else {
-    moonIcon.classList.remove("hidden");
-    sunIcon.classList.add("hidden");
-  }
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   //add hidden if on mobile
@@ -435,16 +435,6 @@ cancelRenameFolder.addEventListener("click", () => {
 
 // Share zip folder
 
-// const shareFolderBtn = document.querySelector(".share-folder-btn")
-
-// if (shareFolderBtn){
-//   shareFolderBtn.forEach((folder)=>{
-//     const parentFolder = folder.closest('.parent-folder')
-//     const folderId = parentFolder.querySelector("")
-
-//   })
-// }
-
 const shareFolderDialog = document.querySelector(".share-folder-dialog");
 
 const linkContainer = document.querySelector(".dialog-ctr.share-folder");
@@ -453,7 +443,7 @@ function shareZipFolder(folderId) {
   console.log("folder id", folderId);
   shareFolderDialog.showModal();
   linkContainer.innerHTML = `
-  <div class="loading-link">Zipping folder</div>
+  <div class="loading-link">Zipping folder...</div>
   `;
   fetch(`/share-folder/${folderId}`, {
     method: "POST",
@@ -461,11 +451,19 @@ function shareZipFolder(folderId) {
     .then((response) => response.json())
     .then((data) => {
       if (data.empty) {
-        alert("This folder is empty");
+        shareFolderDialog.close();
+        setTimeout(() => {
+          alert("This folder is empty");
+        }, 0);
         return;
       }
       if (data.downloadLink) {
         // window.location.href = data.downloadLink;
+        shareFolderDialog.addEventListener("click", (event) => {
+          if (event.target === shareFolderDialog) {
+            shareFolderDialog.close();
+          }
+        });
         const expirationTime = new Date(data.expiresAt).toLocaleString();
         linkContainer.innerHTML = `
                       <input
@@ -475,7 +473,8 @@ function shareZipFolder(folderId) {
                         readonly
                         onclick="this.select()"
                       />
-                      <p>${expirationTime}</p>
+                      <p class = "link-exp-text">Link expired on:</p>
+                      <p class = "exp-text">${expirationTime}</p>
                       <div class="share-folder-btn-ctr">
                         <button class="copy-folder-link-btn">Copy link</button>
                       </div>
@@ -484,9 +483,16 @@ function shareZipFolder(folderId) {
         copyLinkBtn.addEventListener("click", async () => {
           await navigator.clipboard.writeText(data.downloadLink);
           shareFolderDialog.close();
-          setTimeout(() => {
-            alert("Link copied");
-          }, 0);
+          const clipboardAlert = document.querySelector(".clip-board");
+          clipboardAlert.classList.add("show");
+
+          clipboardAlert.timeoutId = setTimeout(() => {
+            clipboardAlert.classList.remove("show");
+            clipboardAlert.timeoutId = null;
+          }, 3000);
+          // setTimeout(() => {
+          //   alert("Link copied");
+          // }, 0);
         });
       } else {
         alert("Failed to generate ZIP.");

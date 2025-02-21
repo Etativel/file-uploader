@@ -154,8 +154,8 @@ async function getAllFilesInFolder(folderId) {
   });
 }
 
-const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
-const expiredFiles = new Map(); // Store fileId and expiration timestamps
+const EXPIRATION_TIME = 60 * 60 * 1000;
+const expiredFiles = new Map();
 
 async function shareZipFolder(req, res) {
   try {
