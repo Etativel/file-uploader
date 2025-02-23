@@ -38,22 +38,46 @@
               placeholder="username"
               required
               class="input-box"
+              value="<%= value.username %>"
             />
+            <% const username_error = errors.filter(e => e.path === "username")
+            .map(e => e.msg) .join(" "); %> <% if (username_error) { %>
+            <div class="error-message">
+              <p class="error"><%= username_error %></p>
+            </div>
+
+            <% } %>
+
             <input
               name="email"
               type="email"
               placeholder="email"
               required
               class="input-box"
+              value="<%= value.email %>"
             />
+            <% const email_error = errors .filter(e => e.path === "email")
+            .map(e => e.msg) .join(" "); %> <% if (email_error) { %>
+            <div class="error-message">
+              <p class="error"><%= email_error %></p>
+            </div>
+
+            <% } %>
             <input
               name="password"
-              type="text"
+              type="password"
               placeholder="password"
               required
               class="input-box"
+              value="<%= value.password %>"
             />
+            <% const passwordErrors = errors .filter(e => e.path === "password")
+            .map(e => e.msg) .join(" "); %> <% if (passwordErrors) { %>
+            <div class="error-message">
+              <p class="error"><%= passwordErrors %></p>
+            </div>
 
+            <% } %>
             <button type="submit" class="submit-btn">Register</button>
           </form>
           <div class="sign-up-info">

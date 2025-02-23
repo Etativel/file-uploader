@@ -11,12 +11,19 @@
 }
 
 .error-message {
-  font-size: medium;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+
+.error-message {
+  font-size: small;
   padding-left: 12px;
   /* padding-bottom: 12px; */
   color: red;
   opacity: 90%;
-  transform: translateY(-40%);
+  /* transform: translateY(-40%); */
+  padding-bottom: 12px;
 }
 
 .container {
