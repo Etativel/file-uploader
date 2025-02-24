@@ -433,7 +433,7 @@
                     <%= new Date(file.uploadedAt).toLocaleDateString('en-GB', {
                     day: 'numeric', month: 'short', year: 'numeric' }) %>
                   </td>
-                  <td class="td-type"><%= file.mimetype.split("/")[0] %></td>
+                  <td class="td-type"><%= file.mimetype.split("/")[1] %></td>
                   <td class="td-size"><%= formatFileSize(file.size) %></td>
 
                   <td>
