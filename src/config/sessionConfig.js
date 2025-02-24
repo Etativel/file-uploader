@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../../.env" });
 const expressSession = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
@@ -8,7 +9,7 @@ module.exports = function (app) {
       cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000, // ms
       },
-      secret: "a santa at nasa",
+      secret: process.env.SESSION_SECRET,
       resave: true,
       saveUninitialized: true,
       store: new PrismaSessionStore(new PrismaClient(), {
