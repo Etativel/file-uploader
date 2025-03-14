@@ -45,6 +45,8 @@ app.use((req, res) => {
   res.send("404 Page not found");
 });
 
-const PORT = 3030;
+// const PORT = 3030;
 
-app.listen(PORT, () => console.log("App listen to port ", PORT));
+// app.listen(PORT, () => console.log("App listen to port ", PORT));
+
+module.exports = app;
