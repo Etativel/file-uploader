@@ -1,0 +1,60 @@
+file-uploader
+│   ├── .env
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── prisma
+│   │   ├── migrations
+│   │   └── schema.prisma
+│   ├── README2.md
+│   ├── README_example.md
+│   ├── src
+│   │   ├── app.js
+│   │   ├── config
+│   │   │   ├── cloudinaryConfig.js
+│   │   │   └── sessionConfig.js
+│   │   ├── controllers
+│   │   │   ├── authController.js
+│   │   │   ├── fileController.js
+│   │   │   └── folderController.js
+│   │   ├── middlewares
+│   │   │   └── multer.js
+│   │   ├── prismaClient
+│   │   │   └── index.js
+│   │   ├── public
+│   │   │   ├── icons
+│   │   │   │   ├── clouds.png
+│   │   │   │   ├── dots.png
+│   │   │   │   ├── file.png
+│   │   │   │   ├── folder 1.png
+│   │   │   │   ├── folder-auth.png
+│   │   │   │   ├── folder.png
+│   │   │   │   ├── jpg.png
+│   │   │   │   ├── plus.png
+│   │   │   │   ├── small-folder.png
+│   │   │   │   ├── txt.png
+│   │   │   │   └── white-cloud.png
+│   │   │   ├── js
+│   │   │   │   └── dashboardDOM.js
+│   │   │   └── styles
+│   │   │       ├── dashboard.css
+│   │   │       ├── landingPage.css
+│   │   │       └── signInPage.css
+│   │   ├── routes
+│   │   │   ├── auth.js
+│   │   │   ├── dashboard.js
+│   │   │   ├── downloadZip.js
+│   │   │   ├── fileManagementRouter.js
+│   │   │   ├── folder.js
+│   │   │   ├── folderManagementRouter.js
+│   │   │   └── upload.js
+│   │   ├── services
+│   │   │   └── userServices.js
+│   │   ├── uploads
+│   │   └── views
+│   │       ├── dashboard.ejs
+│   │       ├── landing.ejs
+│   │       ├── loginForm.ejs
+│   │       └── signUpForm.ejs
+│   ├── todo
+│   └── tree_output.txt
