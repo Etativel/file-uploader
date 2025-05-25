@@ -27,7 +27,7 @@ async function isUsernameTaken(username) {
     },
   });
   if (!username) return "Username cannot be empty";
-  console.log("this is usernames", usernames);
+  // console.log("this is usernames", usernames);
   return usernames !== null;
 }
 

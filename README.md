@@ -2,26 +2,26 @@
 
 A sleek and feature-rich **File Manager** powered by Express.js, Prisma ORM, Koyeb PostgreSQL, and Cloudinary. Users can effortlessly **create, delete, and rename files and folders**, upload files to the cloud, and generate public URLs for easy sharing.
 
-## 🚀 Features
+## Features
 
-- ✅ User authentication (Sign up, Login, Logout) using **Passport.js**
-- 📁 Create, delete, and update folders
-- 📄 Create, delete, and read files
-- ☁️ Upload files to **Cloudinary**
-- 🔗 Share public URLs for files
-- 🗃️ Organized folder structure for better usability
+- User authentication (Sign up, Login, Logout) using **Passport.js**
+- Create, delete, and update folders
+- Create, delete, and read files
+- Upload files to **Cloudinary**
+- Share public URLs for files
+- Organized folder structure for better usability
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend:** Node.js, Express.js
-- **Database:** Koyeb PostgreSQL
+- **Database:** Supabase PostgreSQL
 - **ORM:** Prisma
 - **Authentication:** Passport.js
 - **Storage:** Cloudinary for file uploads
 - **View Engine:** EJS (for rendering views)
 - **Styling:** CSS
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 file-uploader
@@ -85,7 +85,7 @@ file-uploader
 │ └── tree_output.txt
 ```
 
-## ⚡ Installation
+## Installation
 
 1. Clone the repository:
    ```sh
@@ -115,18 +115,18 @@ file-uploader
    ```
    The app runs on `http://localhost:3030`
 
-## 🔑 Authentication
+## Authentication
 
 - **Sign up & Login** using bcrypt for password hashing.
 - Sessions handled with **express-session**.
 - Authenticated users can manage files and folders.
 
-## ☁️ Cloud Storage
+## Cloud Storage
 
 - Files are uploaded to **Cloudinary**.
 - Each uploaded file gets a **public URL** for sharing.
 
-## 📌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint                             | Description               |
 | ------ | ------------------------------------ | ------------------------- |
@@ -140,7 +140,7 @@ file-uploader
 | POST   | `/dashboard/delete/:fileId`          | Delete a file             |
 | POST   | `/dashboard/share-folder/:folderId`  | Share a folder            |
 
-## 📜 Route Details
+## Route Details
 
 ### Authentication Routes
 
@@ -160,23 +160,23 @@ file-uploader
 - **POST** `/dashboard/*/upload` - Uploads a file to the specified folder.
 - **POST** `/dashboard/delete/:fileId` - Deletes a file from the specified folder.
 
-## 🛠️ Middleware and Helpers
+## Middleware and Helpers
 
 - **Passport.js**: Handles user authentication and session management.
 - **Multer**: Middleware for handling file uploads.
 - **Flash Messages**: Provides feedback for successful or failed operations (e.g., login failure, successful file upload).
 
-## 🧑‍💻 Authentication & Authorization
+## Authentication & Authorization
 
 All endpoints (except for registration and login) require the user to be authenticated. The authentication middleware ensures the user is logged in before accessing protected routes.
 
-## 🎨 UI & Design
+## UI & Design
 
 - Fully responsive design using **CSS**.
 - Smooth animations for file/folder interactions.
 - **EJS templates** used for rendering views.
 
-## 📜 License
+## License
 
 MIT License © 2025 Farhan Maulana
 

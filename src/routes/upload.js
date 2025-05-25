@@ -56,7 +56,7 @@ router.post(
     }
 
     const files = req.files;
-    console.log(files);
+    // console.log(files);
     const fileData = files.map((file) => ({
       filename: file.filename,
       filepath: file.path,

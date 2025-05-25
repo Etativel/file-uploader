@@ -6,7 +6,7 @@ file-uploader
 │   ├── prisma
 │   │   ├── migrations
 │   │   └── schema.prisma
-│   ├── README2.md
+│   ├── README.md
 │   ├── README_example.md
 │   ├── src
 │   │   ├── app.js

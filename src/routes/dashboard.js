@@ -15,7 +15,7 @@ router.use((req, res, next) => {
 router.get("/:folderPath(*)", async (req, res) => {
   const folderPath = req.params.folderPath;
   // const folderId = req.params.id
-  console.log(req.body);
+  // console.log(req.body);
   const fullPath = `uploads/dashboard-${req.user.id}/${folderPath}`.replace(
     /\/$/,
     ""
