@@ -2,6 +2,8 @@
 
 A sleek and feature-rich **File Manager** powered by Express.js, Prisma ORM, Koyeb PostgreSQL, and Cloudinary. Users can effortlessly **create, delete, and rename files and folders**, upload files to the cloud, and generate public URLs for easy sharing.
 
+- Live Demo: https://uploader.up.railway.app/
+
 ## Features
 
 - User authentication (Sign up, Login, Logout) using **Passport.js**
